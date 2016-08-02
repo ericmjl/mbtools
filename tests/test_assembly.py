@@ -4,6 +4,7 @@ from hypothesis.strategies import lists, text
 from mbtools.assembly import GibsonAssembler
 from entropy import shannon_entropy
 
+
 @given(lists(text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=500),
              min_size=2,
              average_size=3))

@@ -43,7 +43,7 @@ def gibson_assembly_primers(up, dn, primer_length=40):
     dn_fw = Seq(up[-ohl:] + dn[0:anl], alphabet=DNAAlphabet())
     # Upstream part's re-assembly primer
     up_re = Seq(up[-anl:] + dn[0:ohl], alphabet=DNAAlphabet())\
-                .reverse_complement()
+        .reverse_complement()
 
     return dn_fw, up_re
 

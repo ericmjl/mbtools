@@ -21,7 +21,6 @@ class GibsonAssembler(nx.DiGraph):
             if i < len(self.sequences) - 1:
                 self.add_edge(self.sequences[i], self.sequences[i+1])
             else:
-            # elif i == len(self.sequences) -1:
                 self.add_edge(self.sequences[i], self.sequences[0])
 
     def compute_assembly_primers(self):

@@ -3,6 +3,7 @@ from hypothesis import given, assume
 from hypothesis.strategies import floats
 from numpy import isfinite
 
+
 @given(floats(), floats(), floats())
 def test_target_vol(start_conc, start_vol, target_conc):
     assume(start_conc > 0)

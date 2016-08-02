@@ -8,6 +8,7 @@ from Levenshtein import distance
 from difflib import SequenceMatcher
 from Bio.Seq import Seq
 
+
 def alignment_indices(str1, str2):
     """
     Finds the optimal alignment between two strings.

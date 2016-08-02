@@ -46,6 +46,7 @@ def test_gibson_assembly_primers(part1, part2):
     assert part2_fw[15:] in Seq(part2)
     assert part1_re[15:].reverse_complement() in Seq(part1)
 
+
 @given(text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=1000),
        text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=1000))
 def test_gibson_sequencing_primers(part1, part2):
