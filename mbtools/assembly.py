@@ -3,8 +3,8 @@ from .primers import gibson_assembly_primers, gibson_sequencing_primers
 
 
 class GibsonAssembler(nx.DiGraph):
-    def __init__(sequences):
-        super(GibsonAssembly, self).__init__()
+    def __init__(self, sequences):
+        super(GibsonAssembler, self).__init__()
 
         self.sequences = sequences
         self.add_nodes()
@@ -28,7 +28,7 @@ class GibsonAssembler(nx.DiGraph):
         for up, dn in self.edges():
             dn_fw, up_re = gibson_assembly_primers(up, dn)
             self.node[dn]['fw_gibson'] = dn_fw
-            self.node[re]['re_gibson'] = up_re
+            self.node[up]['re_gibson'] = up_re
 
     def compute_sequencing_primers(self):
         for up, dn in self.edges():
