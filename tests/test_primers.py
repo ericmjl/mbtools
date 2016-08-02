@@ -37,8 +37,8 @@ def test_anneal_temp_chem_corr(DMSO, sequence):
 @given(text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=1000),
        text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=1000))
 def test_gibson_assembly_primers(part1, part2):
-    assume(shannon_entropy(part1) > 0.22)
-    assume(shannon_entropy(part2) > 0.22)
+    assume(shannon_entropy(part1) > 0.24)
+    assume(shannon_entropy(part2) > 0.24)
 
     part2_fw, part1_re = gibson_primers(part1, part2)
 

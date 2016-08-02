@@ -8,7 +8,7 @@ import entropy
 
 @given(text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=1000))
 def test_amplify_without_overhang(template):
-    assume(entropy.shannon_entropy(template) > 0.22)
+    assume(entropy.shannon_entropy(template) > 0.24)
     fw_primer = Seq(template[15:30])
     re_primer = Seq(template[-30:-15]).reverse_complement()
     template = Seq(template)
