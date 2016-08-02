@@ -1,0 +1,11 @@
+name: mbtools
+channels:
+- ericmjl
+- defaults
+- conda-forge
+dependencies:
+- biopython
+- python-Levenshtein
+- python=3.5
+- ipython
+- py.test
