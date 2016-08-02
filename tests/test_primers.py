@@ -1,4 +1,4 @@
-from mbtools.primers import anneal_temp, gibson_primers
+from mbtools.primers import anneal_temp, gibson_assembly_primers
 from Bio.SeqUtils.MeltingTemp import Tm_GC
 from Bio.Seq import Seq
 from hypothesis import given, assume
@@ -40,7 +40,7 @@ def test_gibson_assembly_primers(part1, part2):
     assume(shannon_entropy(part1) > 0.24)
     assume(shannon_entropy(part2) > 0.24)
 
-    part2_fw, part1_re = gibson_primers(part1, part2)
+    part2_fw, part1_re = gibson_assembly_primers(part1, part2)
 
     assert part2_fw[15:] in Seq(part2)
     assert part1_re[15:].reverse_complement() in Seq(part1)
