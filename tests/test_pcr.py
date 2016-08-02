@@ -3,12 +3,13 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
 from hypothesis.strategies import text, integers
 from hypothesis import given, assume
-import entropy
+from entropy import shannon_entropy
+import numpy as np
 
 
-@given(text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=1000))
+@given(text(alphabet=['A', 'T', 'G', 'C'], min_size=200, max_size=500))
 def test_amplify_without_overhang(template):
-    assume(entropy.shannon_entropy(template) > 0.24)
+    assume(shannon_entropy(template) > 0.24)
     fw_primer = Seq(template[15:30])
     re_primer = Seq(template[-30:-15]).reverse_complement()
     template = Seq(template)
