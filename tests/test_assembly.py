@@ -13,6 +13,7 @@ def test_gibson_assembly_class(parts):
     GibsonAssembler class has to be done right.
     """
     g = GibsonAssembler(parts)
+    assume(len(set(parts)) > 1)  # make sure no duplicates exist
     for part in parts:
         assume(shannon_entropy(part) > 0.24)
 
