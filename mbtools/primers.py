@@ -1,7 +1,7 @@
 from Bio.SeqUtils.MeltingTemp import Tm_GC, salt_correction, chem_correction
 from Bio.Seq import Seq
 from Bio.Alphabet import DNAAlphabet
-import math
+import numpy as np
 
 
 def anneal_temp(sequence, salt_corr=None, chem_corr=None):
@@ -36,8 +36,8 @@ def gibson_assembly_primers(up, dn, primer_length=40):
     Computes the necessary Gibson assembly primers for the junction between
     upstream (up) and downstream (dn) parts.
     """
-    anl = math.round(primer_length * 2/3)  # anneal length
-    ohl = math.round(primer_length * 1/3)  # overhang length
+    anl = int(round(primer_length * 2/3))  # anneal length
+    ohl = int(round(primer_length * 1/3))  # overhang length
 
     # Downstream part's fw-assembly primer
     dn_fw = Seq(up[-ohl:] + dn[0:anl], alphabet=DNAAlphabet())
