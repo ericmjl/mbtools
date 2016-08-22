@@ -1,9 +1,11 @@
 from mbtools.pcr import compute_amplicon
+from mbtools.assembly import GibsonAssembler
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
 from hypothesis.strategies import text, integers
 from hypothesis import given, assume
 from entropy import shannon_entropy
+from .testutils import seq_generator
 import numpy as np
 
 
@@ -16,7 +18,7 @@ def test_amplify_without_overhang():
 
     assert fw_primer in amplicon
     assert re_primer.reverse_complement() in amplicon
-    assert len(amplicon) <= len(template)
+    assert len(amplicon) == len(template) - 15 - 15
 
 
 def test_amplify_with_overhang():
