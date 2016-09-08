@@ -36,10 +36,10 @@ def cpec_equimolarity(dict_conc_bp):
     relvol = {}
     for key, value in dict_conc_bp.items():
         #Calculate the concentration of fragments of a particular sequence in solution
-        fragmentperul = (float(value[0])/(1.62*10**-21))/float(value[1])
+        fragment_per_ul = (float(value[0])/(1.62*10**-21))/float(value[1])
 
-        d_concentrations[key] = fragmentperul
-        l_concentrations.append(fragmentperul)
+        d_concentrations[key] = fragment_per_ul
+        l_concentrations.append(fragment_per_ul)
     for key, value in d_concentrations.items():
         """
         By dividing the highest concentration by each of the other concentrations,
