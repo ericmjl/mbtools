@@ -25,29 +25,38 @@ def input_plasmid_mass(target_len, plasmid_len, target_mass):
     """
     return target_mass * plasmid_len / target_len
 
-def cpec_equimolarity(dict_conc_bp):
+
+import collections
+Sequence = collections.namedtuple("Sequence", "name dna_conc seq_length")
+
+def cpec_equimolarity(list_seq):
     """
-    For every sequence, the key is the name of the sequence, and the value is a list of
-    two numbers: 1) concentration of DNA in solution (g/ul) and
-    2) the number of base pairs in the sequence
+    Takes in PCR product lengths and PCR product concentrations,
+    and returns the relative volumes of PCR product that is added to a CPEC reaction.
+
+    Parameters:
+    - list_seq: (list) a list of PCR products and their attributes in namedtuples:
+        - name: (str) name given to a particular PCR product of interest
+        - dna_conc: (float) in units g/µL
+        - seq_length: (int) number of base **pairs**.
+    Example namedtuple:
+        A1 = Sequence(name="A1", dna_conc=42.3*10**-9, seq_length=1600)
+
+    Returns:
+    - rel_vol: (dict) a dictionary keyed by part name. The numbers are relative to the most concentrated piece.
+
     """
-    d_concentrations = {}
-    l_concentrations = []
+    d_fragment_conc = {} #dictionary of calculated concentrations of DNA sequences per ul
+    l_fragment_conc = [] #list of calculated concentrations of DNA sequences per ul
     relvol = {}
-    for key, value in dict_conc_bp.items():
+    for seq in list_seq:
         #Calculate the concentration of fragments of a particular sequence in solution
-        fragment_per_ul = (float(value[0])/(1.62*10**-21))/float(value[1])
+        fragment_conc = (float(seq.dna_conc)/(1.62*10**-21))/float(seq.seq_length)
+        d_fragment_conc[str(seq.name)] = fragment_conc
+        l_fragment_conc.append(fragment_conc)
 
-        d_concentrations[key] = fragment_per_ul
-        l_concentrations.append(fragment_per_ul)
-    for key, value in d_concentrations.items():
-        """
-        By dividing the highest concentration by each of the other concentrations,
-        we know how much volume of a given sequence needs to used to make it equimolar to
-        one unit volume of the sequence with the highest concentration
-        """
-
-        volume = float(max(l_concentrations))/float(value)
-        relvol[key] = volume
+    for seq_name, fragment_conc in d_fragment_conc.items():
+        volume = float(max(l_fragment_conc))/float(fragment_conc)
+        relvol[seq_name] = volume
 
     return relvol
