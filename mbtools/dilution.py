@@ -47,16 +47,14 @@ def cpec_equimolarity(list_seq):
 
     """
     d_fragment_conc = {} #dictionary of calculated concentrations of DNA sequences per ul
-    l_fragment_conc = [] #list of calculated concentrations of DNA sequences per ul
     relvol = {}
     for seq in list_seq:
         #Calculate the concentration of fragments of a particular sequence in solution
         fragment_conc = (float(seq.dna_conc)/(1.62*10**-21))/float(seq.seq_length)
         d_fragment_conc[str(seq.name)] = fragment_conc
-        l_fragment_conc.append(fragment_conc)
 
     for seq_name, fragment_conc in d_fragment_conc.items():
-        volume = float(max(l_fragment_conc))/float(fragment_conc)
+        volume = float(max(d_fragment_conc.values()))/float(fragment_conc)
         relvol[seq_name] = volume
 
     return relvol
